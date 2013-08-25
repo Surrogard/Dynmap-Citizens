@@ -1,5 +1,6 @@
 package me.newboy.DynmapCitizens;
 
+import java.util.logging.Level;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.Bukkit;
@@ -20,9 +21,10 @@ public final class DynmapCitizens extends JavaPlugin
 
     private static DynmapAPI dyn;
 
+    @Override
     public void onEnable()
     {
-        getLogger().info(getDescription().getVersion() + " has been enabled.");
+        getLogger().log(Level.INFO, "{0} has been enabled.", getDescription().getVersion());
         getServer().getPluginManager().registerEvents(this, this);
         reloadConfig();
         saveConfig();
@@ -63,6 +65,7 @@ public final class DynmapCitizens extends JavaPlugin
 
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable()
         {
+            @Override
             public void run()
             {
                 if (DynmapCitizens.dyn == null)
@@ -84,7 +87,8 @@ public final class DynmapCitizens extends JavaPlugin
                     }
                 }
 
-                boolean found = false;
+                boolean found;
+                found = false;
                 for (Marker m : DynmapCitizens.ms.getMarkers())
                 {
                     if (m != null)
@@ -141,9 +145,10 @@ public final class DynmapCitizens extends JavaPlugin
         }, 100L, 100L);
     }
 
+    @Override
     public void onDisable()
     {
-        getLogger().info(getDescription().getVersion() + " has been disabled.");
+        getLogger().log(Level.INFO, "{0} has been disabled.", getDescription().getVersion());
     }
 
 }
