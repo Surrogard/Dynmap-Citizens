@@ -1,10 +1,23 @@
 package me.newboy.DynmapCitizens;
 
+import java.util.Iterator;
+import java.util.Set;
+import java.util.logging.Logger;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Server;
+import org.bukkit.World;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.FileConfigurationOptions;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.Listener;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitScheduler;
 import org.dynmap.DynmapAPI;
 import org.dynmap.markers.Marker;
 import org.dynmap.markers.MarkerAPI;
@@ -111,18 +124,11 @@ public final class DynmapCitizens extends JavaPlugin
                     if ((npc != null) && (npc.getBukkitEntity() != null) && (npc.getFullName() != null) && (npc.getBukkitEntity().getLocation() != null) && (DynmapCitizens.ms != null) && (DynmapCitizens.mar != null))
                     {
                         found = false;
-                        Marker m;
-                        for ( ?  ?  ?  = DynmapCitizens.ms.getMarkers().iterator();  ?  ?  ? 
+                        Marker m = null;
+                        for (npc = (NPC) DynmapCitizens.ms.getMarkers().iterator();;
+                                m.setLocation("citizens2-npc-" + npc.getFullName(), npc.getBukkitEntity().getLocation().getX(), npc.getBukkitEntity().getLocation().getY(), npc.getBukkitEntity().getLocation().getZ()))
                         {
-                        }
-                        .hasNext();
-                        m.setLocation("citizens2-npc-" + npc.getFullName(), npc.getBukkitEntity().getLocation().getX(), npc.getBukkitEntity().getLocation().getY(), npc.getBukkitEntity().getLocation().getZ())
-                        
                             
-                            )
-            {
-              m = (Marker) ?  ?  ?
-                            .next();
                             if ((m == null)
                                     || (!npc.getFullName().equalsIgnoreCase(m.getLabel())))
                             {
@@ -134,10 +140,13 @@ public final class DynmapCitizens extends JavaPlugin
                                 break label486;
                             }
                         }
-                        if (!found)
+                       /* if (found)
+                        {
+                        }
+                        else
                         {
                             DynmapCitizens.ms.createMarker("citizens2-npc-" + npc.getFullName(), npc.getFullName(), npc.getBukkitEntity().getWorld().getName(), npc.getBukkitEntity().getLocation().getX(), npc.getBukkitEntity().getLocation().getY(), npc.getBukkitEntity().getLocation().getZ(), DynmapCitizens.mar.getMarkerIcon("offlineuser"), false);
-                        }
+                        } */
                     }
                 }
             }
@@ -151,8 +160,3 @@ public final class DynmapCitizens extends JavaPlugin
     }
 
 }
-
-/* Location:           C:\Users\Ryan\Downloads\DynmapCitizens.jar
- * Qualified Name:     me.newboy.DynmapCitizens.DynmapCitizens
- * JD-Core Version:    0.6.2
- */
